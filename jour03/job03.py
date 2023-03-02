@@ -18,9 +18,8 @@ class ListeDeTaches:
     def __init__(self):
         self.taches = []
 
-    def ajouterTache(self, titre, description):
-        self.nouvelle_tache = Tache(titre, description, "En cours")
-        self.taches.append(self.nouvelle_tache)
+    def ajouterTache(self, tache):
+        self.taches.append(tache)
 
     def supprimerTache(self, titre):
         for i in self.taches:
@@ -28,14 +27,31 @@ class ListeDeTaches:
                self.taches.remove(i) 
 
     def marquerCommeFinie(self, titre):
-        for i in self.taches:
-            if str(titre) == self.taches[i]:
-                pass
+        if titre.statut == "A faire":
+            titre.statut = "Terminé"
 
     def afficherListe(self):
-        pass
-        # for tache in self.taches:
-        #     print(f"{self.}")
+        print("Liste de taches : ")
+        for tache in self.taches:
+            print(f"    - {tache.titre} : {tache.description}, {tache.statut}")
 
     def filtrerListe(self):
-        pass
+        self.a_faire = []
+        self.termine = []
+        for tache in self.taches:
+            if tache.status ==  "A faire":
+                self.a_faire.append(self.tache)
+            elif tache.status == "Terminé":
+                self.termine.append(self.tache)
+        self.taches = self.a_faire + self.termine
+
+t1 = Tache("Menage", "Laver sols", "A faire")
+t2 = Tache("Jardin", "Planter tomates", "Terminé")
+t3 = Tache("Linge", "Laver linge", "A faire")
+
+l1 = ListeDeTaches()
+l1.ajouterTache(t1)
+l1.ajouterTache(t2)
+l1.ajouterTache(t3)
+l1.afficherListe()
+print(l1.taches)
